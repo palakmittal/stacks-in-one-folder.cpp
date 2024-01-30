@@ -1,0 +1,97 @@
+#include<iostream>
+using namespace std;
+
+class stack{
+public:
+int* arr;
+int size;
+int top;
+// ctor (creation)
+stack(int size){
+  arr= new int[size];
+  this->size=size;
+  this->top=-1;
+}
+// push operation
+void push(int data){
+  if(top==size-1){
+    cout<<"stack full\n";
+    return;
+  }
+  top++;
+  arr[top]=data;
+}
+//pop
+void pop(){
+  if(top==-1){
+    cout<<"empty stack\n";
+    return;
+  }
+  top--;
+}
+// get size
+int getsize(){
+  if(top==-1){
+    cout<<"empty stack\n";
+    return 0;
+  }
+  else{
+    return top+1;
+  }
+}
+//peek
+int getTop(){
+  if(top==-1){
+    cout<<"empty stack, top element not exists.\n";
+    return -1;
+  }
+  else{
+    return arr[top];
+  }
+}
+// is empty
+bool isempty(){
+  if(top==-1){
+    cout<<"yes, empty stack\n";
+    return true;
+  }
+  else{
+    cout<<"not an empty stack: ";
+    return false;
+  }
+}
+//print
+void print(){
+  cout<<"print stack:  ";
+  if(top==-1){
+    cout<<"empty stack\n";
+    return;
+  }
+  else{
+    for(int i=0;i<getsize(); i++){
+      cout<<arr[i]<<" ";
+    }
+  }
+}
+};
+
+int main(){
+
+stack st(5);
+
+st.push(10);
+st.push(20);
+st.push(30);
+st.print();
+
+st.pop();
+st.print();
+
+cout<<"size: "<<st.getsize()<<endl;
+
+cout<<"top element: "<<st.getTop()<<endl;
+
+cout<<st.isempty()<<endl;
+
+  return 0;
+}
