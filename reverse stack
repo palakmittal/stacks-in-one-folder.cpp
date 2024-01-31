@@ -1,0 +1,77 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+//print
+void print(stack<int>st){
+  int top=st.size()-1;
+  cout<<"print stack:  ";
+  if(top==-1){
+    cout<<"empty stack\n";
+    return;
+  }
+  else{
+    while(top!=-1){
+      cout<<st.top()<<" ";
+      st.pop();
+      top--;
+    }
+  }
+    
+}
+
+
+void insert_at_bottom(stack<int>&st,int data){
+  int size=st.size();
+  //base case
+  if(size==0|| st.empty()){
+    st.push(data);
+    return;
+  }
+
+int temp=st.top();
+st.pop();
+size--;
+//recursion call
+insert_at_bottom(st,data);
+// BACKTRACK  to reinsert elements to stack
+st.push(temp);
+
+}
+
+
+void reverse_stack(stack<int>&st){
+
+  if(st.empty()){
+    return;
+  }
+
+int temp=st.top();
+st.pop();
+reverse_stack(st);
+
+//backtrack to fill elements in stack that is in reverse
+insert_at_bottom(st,temp);
+
+}
+
+int main(){
+
+stack<int>st;
+
+
+st.push(10);
+st.push(20);
+st.push(30); 
+st.push(40);
+st.push(50); 
+print(st);
+
+cout<<endl;
+
+
+reverse_stack(st);
+print(st);
+
+  return 0;
+}
