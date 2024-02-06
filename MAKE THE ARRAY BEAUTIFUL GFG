@@ -1,0 +1,46 @@
+#include<iostream>
+#include<stack>
+#include<vector>
+using namespace std;
+
+/*            problem statement
+ return the array in a way that only same signed integers can be there in array else to be popped out. if the two adjacents are of same sign then they can be in array otherwise both have to be popped out
+e.g:  input=>>> 2 3 5 -4 6 -2 8 9
+      output=>>> 2 9
+*/
+
+vector<int> making_beautiful_array(int arr[],int Size){
+stack<int>st;
+for(int i=0;i<Size;i++){
+  // agar mera stack empty hai
+   if(st.empty()){
+    st.push(arr[i]);
+   }
+// agar array ke andar wala element positive hai
+   else if(arr[i]>=0){
+    if(st.top()>=0){
+      st.push(arr[i]);
+    }
+    else{
+      st.pop();
+    }
+   }
+// agar array ke andar wala element negative hai
+   else{
+     if(st.top()<0){
+      st.push(arr[i]);
+    }
+    else{
+      st.pop();
+    }
+   }
+}
+vector<int>ans(st.size());
+int i=st.size()-1;
+while(!st.empty()){
+  ans[i]=st.top();
+  st.pop();
+  i--;
+}
+  return ans;
+}
